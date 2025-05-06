@@ -43,7 +43,12 @@ namespace Lab_5
             Console.WriteLine($"Метод Multiply рахує добуток двох дробів f1 * f2: {MyFracToString(Normalize(multiply))}");
             MyFrac divide = Divide(frac1, frac2);
             Console.WriteLine($"Метод Divide рахує чатку двох дробів f1/f2: {MyFracToString(Normalize(divide))}");
-
+            Console.Write("Введіть число для роботи подальших методів: ");
+            int n = int.Parse(Console.ReadLine());
+            MyFrac calc1 = CalcExpr1(n);
+            Console.WriteLine($"Метод CalcExpr1 рахує, користуючись вищезгаданими методами, суму 1/(1*2)+1/(2*3)+1/(3*4)+...+1/(n*(n+1)) як дріб: {MyFracToString(calc1)}");
+            MyFrac calc2 = CalcExpr2(n);
+            Console.WriteLine($"рахує, користуючись вищезгаданими методами, добуток (1–1/4)*(1–1/9)*(1–1/16)*...*(1–1/n^2) як дріб: {MyFracToString(calc2)}");
         }
         private static MyFrac InputTuple()
         {
@@ -111,14 +116,15 @@ namespace Lab_5
         {
             long intPart = f.nom / f.denom;
             string res = "";
+            MyFrac normIt = Minus((f.nom, f.denom), (f.denom * intPart, f.denom));
 
             if (intPart < 0)
             {
-                return res += $"-({intPart} + {Normalize(f)})";
+                return res += $"-({intPart} + {Normalize(normIt)})";
             }
             else
             {
-                return res += $"({intPart} + {Normalize(f)})";
+                return res += $"({intPart} + {Normalize(normIt)})";
             }
         }
         static double DoubleValue(MyFrac f)
@@ -140,6 +146,33 @@ namespace Lab_5
         static MyFrac Divide(MyFrac f1, MyFrac f2)
         {
             return (f1.nom * f2.denom, f1.denom * f2.nom);
+        }
+        static MyFrac CalcExpr1(int n)
+        {
+            MyFrac res = new MyFrac(1, 1 * 2);
+
+            for (int i = 2; i <= n; i++)
+            {
+                res = Plus(res, (1, i * (i + 1)));
+                res = Normalize(res);
+            }
+
+            return res;
+        }
+        static MyFrac CalcExpr2(int n)
+        {
+            MyFrac res = new MyFrac(1, 1);
+
+            for (int i = 2; i <= n; i++)
+            {
+                MyFrac one = new MyFrac(1, 1);
+                MyFrac oneMinus = Minus(one, new MyFrac(1, i * i));
+
+                res = Multiply(res, oneMinus);
+                res = Normalize(res);
+            }
+
+            return res;
         }
     }
 }
