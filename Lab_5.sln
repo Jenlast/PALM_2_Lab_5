@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_5", "Lab_5\Lab_5.csproj", "{B7786CAD-B38C-41EB-9FD3-F835E57D163D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_5_Block_1", "Lab_5\Lab_5_Block_1.csproj", "{B7786CAD-B38C-41EB-9FD3-F835E57D163D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_5_Block_2", "Lab_5_Block_2\Lab_5_Block_2.csproj", "{794E02B9-2A3B-4A31-89FA-69D0710C6738}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B7786CAD-B38C-41EB-9FD3-F835E57D163D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7786CAD-B38C-41EB-9FD3-F835E57D163D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7786CAD-B38C-41EB-9FD3-F835E57D163D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{794E02B9-2A3B-4A31-89FA-69D0710C6738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{794E02B9-2A3B-4A31-89FA-69D0710C6738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{794E02B9-2A3B-4A31-89FA-69D0710C6738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{794E02B9-2A3B-4A31-89FA-69D0710C6738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
