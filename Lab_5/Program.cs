@@ -31,7 +31,7 @@ namespace Lab_5
             Console.WriteLine($"Метод MyFracToString формує рядкове подання дробу з кортежа у форматі \"чисельник / знаменник\": {MyFracToString(frac1)}");
             MyFrac normalizedFrac = Normalize(frac1);
             Console.WriteLine($"Метод Normalize \"нормалізує\" дріб кортежа f, тобто: 1) скорочує його; 2) робить знаменник невід'ємним: {MyFracToString(normalizedFrac)}");
-            Console.WriteLine($"Метод ToStringWithIntPart формує рядкове подання дробу з кортежу f з виділеною цілею частиною: {ToStringWithIntPart(frac1)}");
+            Console.WriteLine($"Метод ToStringWithIntPart формує рядкове подання дробу з кортежу f з виділеною цілею частиною: {(ToStringWithIntPart(frac1))}");
             Console.WriteLine($"Метод DoubleValue формує дійсне значення дробу f: {DoubleValue(frac1)}");
             Console.WriteLine("Для виконання подальших завдань потрібно ввести ще один дріб");
             MyFrac frac2 = InputTuple();
@@ -120,11 +120,11 @@ namespace Lab_5
 
             if (intPart < 0)
             {
-                return res += $"-({intPart} + {Normalize(normIt)})";
+                return res += $"-({intPart} + {MyFracToString(Normalize(normIt))})";
             }
             else
             {
-                return res += $"({intPart} + {Normalize(normIt)})";
+                return res += $"({intPart} + {MyFracToString(Normalize(normIt))})";
             }
         }
         static double DoubleValue(MyFrac f)
