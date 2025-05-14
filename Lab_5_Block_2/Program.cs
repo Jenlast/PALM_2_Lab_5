@@ -7,12 +7,12 @@ namespace Block_2
     {
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-            string filePath = "C:\\Users\\Anton\\source\\repos\\PALM_2_Lab_5\\Lab_5_Block_2\\input.txt";
+            string filePath = "C:\\Users\\annav\\Source\\Repos\\PALM_2_Lab_5\\Lab_5_Block_2\\input.txt";
             try
             {
-                string[] lines = File.ReadAllLines(filePath);
+                string[] lines = File.ReadAllLines(filePath, Encoding.UTF8);
 
                 List<string> result = new List<string>();
 
@@ -27,7 +27,7 @@ namespace Block_2
 
                         if (int.TryParse(parts[7].Trim(), out int grade))
                         {
-                            if (gender == "F" && grade == 5)
+                            if ((gender == "F" || gender == "Ж") && grade == 5)
                             {
                                 result.Add(lastName);
                             }
