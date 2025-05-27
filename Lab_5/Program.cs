@@ -32,7 +32,8 @@ namespace Lab_5
             MyFrac normalizedFrac = Normalize(frac1);
             Console.WriteLine($"Метод Normalize \"нормалізує\" дріб кортежа f, тобто: 1) скорочує його; 2) робить знаменник невід'ємним: {MyFracToString(normalizedFrac)}");
             Console.WriteLine($"Метод ToStringWithIntPart формує рядкове подання дробу з кортежу f з виділеною цілею частиною: {(ToStringWithIntPart(frac1))}");
-            Console.WriteLine($"Метод DoubleValue формує дійсне значення дробу f: {DoubleValue(frac1)}");
+            string doubleNum = frac1.denom == 0 ? "Неможливо вивести дійсне значення дробу, коли знаменник дорівнює 0" : $"{DoubleValue(frac1)}";
+            Console.WriteLine($"Метод DoubleValue формує дійсне значення дробу f: {doubleNum}");
             Console.WriteLine("Для виконання подальших завдань потрібно ввести ще один дріб");
             MyFrac frac2 = InputTuple();
             MyFrac plus = Plus(frac1, frac2);
@@ -79,7 +80,7 @@ namespace Lab_5
 
             if (f.nom == 0)
             {
-                return new MyFrac(0, 1);
+                return new MyFrac(0, 0);
             }
 
             if (f.denom < 0)
@@ -114,17 +115,27 @@ namespace Lab_5
         }
         static string ToStringWithIntPart(MyFrac f)
         {
-            long intPart = f.nom / f.denom;
+            long intPart = f.denom == 0 ? 0 : f.nom / f.denom;
             string res = "";
-            MyFrac normIt = Minus((f.nom, f.denom), (f.denom * intPart, f.denom));
-
-            if (intPart < 0)
+            
+            if (intPart == 0)
             {
-                return res += $"-({intPart} + {MyFracToString(Normalize(normIt))})";
+                return res = "Неможливо вивести цілу частину, коли знаменник дорівнює 0";
             }
             else
             {
-                return res += $"({intPart} + {MyFracToString(Normalize(normIt))})";
+                MyFrac normIt = Normalize(Minus((f.nom, f.denom), (f.denom * intPart, f.denom)));
+
+                if (intPart < 0)
+                {
+                    normIt.nom = Math.Abs(normIt.nom);
+                    normIt.denom = Math.Abs(normIt.denom);
+                    return res += $"-({-intPart} + {MyFracToString(normIt)})";
+                }
+                else
+                {
+                    return res += $"({intPart} + {MyFracToString(normIt)})";
+                }
             }
         }
         static double DoubleValue(MyFrac f)

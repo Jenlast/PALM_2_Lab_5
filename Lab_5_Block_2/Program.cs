@@ -9,7 +9,7 @@ namespace Block_2
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-            string filePath = "C:\\Users\\annav\\Source\\Repos\\PALM_2_Lab_5\\Lab_5_Block_2\\input.txt";
+            string filePath = "input.txt";
             try
             {
                 string[] lines = File.ReadAllLines(filePath, Encoding.UTF8);
