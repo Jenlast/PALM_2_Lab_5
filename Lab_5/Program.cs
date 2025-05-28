@@ -37,13 +37,17 @@ namespace Lab_5
             Console.WriteLine("Для виконання подальших завдань потрібно ввести ще один дріб");
             MyFrac frac2 = InputTuple();
             MyFrac plus = Plus(frac1, frac2);
-            Console.WriteLine($"Метод Plus рахує суму двох дробів f1 + f2: {MyFracToString(Normalize(plus))}");
+            string plusRes = plus.denom == 0 ? "Неможливо вивести суму дробів, коли знаменник дорівнює 0" : $"{MyFracToString(Normalize(plus))}";
+            Console.WriteLine($"Метод Plus рахує суму двох дробів f1 + f2: {plusRes}");
             MyFrac minus = Minus(frac1, frac2);
-            Console.WriteLine($"Метод Minus рахує рівзницю двох дробів f1 - f2: {MyFracToString(Normalize(minus))}");
+            string minusRes = minus.denom == 0 ? "Неможливо вивести суму дробів, коли знаменник дорівнює 0" : $"{MyFracToString(Normalize(minus))}";
+            Console.WriteLine($"Метод Minus рахує рівзницю двох дробів f1 - f2: {minusRes}");
             MyFrac multiply = Multiply(frac1, frac2);
-            Console.WriteLine($"Метод Multiply рахує добуток двох дробів f1 * f2: {MyFracToString(Normalize(multiply))}");
+            string multiplyRes = multiply.denom == 0 ? "Неможливо вивести суму дробів, коли знаменник дорівнює 0" : $"{MyFracToString(Normalize(multiply))}";
+            Console.WriteLine($"Метод Multiply рахує добуток двох дробів f1 * f2: {multiplyRes}");
             MyFrac divide = Divide(frac1, frac2);
-            Console.WriteLine($"Метод Divide рахує чатку двох дробів f1/f2: {MyFracToString(Normalize(divide))}");
+            string divideRes = divide.denom == 0 ? "Неможливо вивести суму дробів, коли знаменник дорівнює 0" : $"{MyFracToString(Normalize(divide))}";
+            Console.WriteLine($"Метод Divide рахує чатку двох дробів f1/f2: {divideRes}");
             Console.Write("Введіть число для роботи подальших методів: ");
             int n = int.Parse(Console.ReadLine());
             MyFrac calc1 = CalcExpr1(n);
@@ -118,7 +122,7 @@ namespace Lab_5
             long intPart = f.denom == 0 ? 0 : f.nom / f.denom;
             string res = "";
             
-            if (intPart == 0)
+            if (f.denom == 0)
             {
                 return res = "Неможливо вивести цілу частину, коли знаменник дорівнює 0";
             }
@@ -131,6 +135,10 @@ namespace Lab_5
                     normIt.nom = Math.Abs(normIt.nom);
                     normIt.denom = Math.Abs(normIt.denom);
                     return res += $"-({-intPart} + {MyFracToString(normIt)})";
+                }
+                else if (intPart == 0)
+                {
+                    return res = $"{MyFracToString(normIt)}";
                 }
                 else
                 {
@@ -168,7 +176,9 @@ namespace Lab_5
                 res = Normalize(res);
             }
 
-            return res;
+            if (n <= 0)
+                return new MyFrac(0, 0);
+            else return res;
         }
         static MyFrac CalcExpr2(int n)
         {
@@ -183,7 +193,9 @@ namespace Lab_5
                 res = Normalize(res);
             }
 
-            return res;
+            if (n <= 0)
+                return new MyFrac(0, 0);
+            else return res;
         }
     }
 }

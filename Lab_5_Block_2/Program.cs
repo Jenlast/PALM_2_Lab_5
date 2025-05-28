@@ -3,6 +3,43 @@ using System.Text;
 
 namespace Block_2
 {
+    struct Student
+    {
+        public string LastName;
+        public string Gender;
+        public int InformaticsGrade;
+
+        public Student(string lastName, string gender, int informaticsGrade)
+        {
+            LastName = lastName;
+            Gender = gender;
+            InformaticsGrade = informaticsGrade;
+        }
+
+        public static bool TryParseFromCsvLine(string csvLine, out Student student)
+        {
+            student = default; 
+            string[] parts = csvLine.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (parts.Length != 9)
+            {
+                return false;
+            }
+
+            string lastName = parts[0].Trim();
+            string gender = parts[3].Trim();
+
+            if (int.TryParse(parts[7].Trim(), out int grade))
+            {
+                student = new Student(lastName, gender, grade);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -14,28 +51,27 @@ namespace Block_2
             {
                 string[] lines = File.ReadAllLines(filePath, Encoding.UTF8);
 
-                List<string> result = new List<string>();
+                List<Student> allStudents = new List<Student>();
 
-                foreach(string line in lines)
+                foreach (string line in lines)
                 {
-                    string[] parts = line.Split(',');
-
-                    if (parts.Length == 9)
+                    if (Student.TryParseFromCsvLine(line, out Student student))
                     {
-                        string lastName = parts[0].Trim();
-                        string gender = parts[3].Trim();
-
-                        if (int.TryParse(parts[7].Trim(), out int grade))
-                        {
-                            if ((gender == "F" || gender == "Ж") && grade == 5)
-                            {
-                                result.Add(lastName);
-                            }
-                        }
+                        allStudents.Add(student);
                     }
                     else
                     {
-                        Console.WriteLine($"Неправильний формат рядка");
+                        Console.WriteLine($"Неправильний формат рядка або помилка парсингу даних: \"{line}\"");
+                    }
+                }
+
+                List<string> result = new List<string>();
+
+                foreach (Student student in allStudents)
+                {
+                    if ((student.Gender == "F" || student.Gender == "Ж") && student.InformaticsGrade == 5)
+                    {
+                        result.Add(student.LastName);
                     }
                 }
 
